@@ -51,9 +51,9 @@
                             <div >
 
                               <button type="button" class="btn btn-outline-primary btn-lg btn-block" @click="addnew" >add new one </button>
-                              <button type="button" class="btn btn-outline-danger btn-lg " @click="addnew" >all </button>
-                              <button type="button" class="btn btn-outline-secondary btn-lg " @click="addnew" >done </button>
-                              <button type="button" class="btn btn-outline-secondary btn-lg " @click="addnew" >not done </button>
+                              <button type="button" class="btn btn-outline-danger btn-lg " @click="showall" >all </button>
+                              <button type="button" class="btn btn-outline-secondary btn-lg " @click="shownotdone" >done </button>
+                              <button type="button" class="btn btn-outline-secondary btn-lg " @click="showdone" >not done </button>
                             </div>
                         </div>
                 
@@ -61,7 +61,7 @@
     
             <div class="container">
                 <div v-if="all" v-for="object in all_todo" v:key="object.id">
-                    <app-todo :obj="object">
+                    <app-todo :obj="object" @cheak="changestyle">
 
 
 
@@ -72,7 +72,7 @@
                 <div v-else>
                   <div  v-if="done" v-for="object in all_todo" v:key="object.id">
                     <div v-if="object.show == 0">
-                    <app-todo :obj="object">
+                    <app-todo :obj="object" @cheak="changestyle">
 
 
 
@@ -82,7 +82,7 @@
                   </div>
                   <div  v-if="!done" v-for="object in all_todo" v:key="object.id">
                     <div v-if="object.show == 1">
-                    <app-todo :obj="object">
+                    <app-todo :obj="object" @cheak="changestyle($event)">
 
 
 

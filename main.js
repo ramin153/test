@@ -1,6 +1,6 @@
 const my_comp = {
     template:
-    ' <div class="py-3"  v-bind:style="{display : display}" ><div id="head" class="bg-secondary text-white mb-0 py-3">{{obj.title}}</div><div id="todo_content">  <div class="pd-3"  :style="{textDecoration : decora}" >{{obj.content}}</div><div style="text-align: center;" class="py-3" ><button type="button " class="btn btn-outline-primary  btn-lg mx-2" @click="changestyle" >mark done </button><button type="button" class="btn btn-outline-danger  btn-lg mx-2" @click="changedis" >remove </button></div></div></div> ',
+    ' <div class="py-3"  v-bind:style="{display : display}" ><div id="head" class="bg-secondary text-white mb-0 py-3">{{obj.title}}{{obj.show}}</div><div id="todo_content">  <div class="pd-3"  :style="{textDecoration : decora}" >{{obj.content}}</div><div style="text-align: center;" class="py-3" ><button type="button " class="btn btn-outline-primary  btn-lg mx-2" @click="changestyle" >mark done </button><button type="button" class="btn btn-outline-danger  btn-lg mx-2" @click="changedis" >remove </button></div></div></div> ',
         props:['obj'],
         data : function (){
             return{
@@ -11,12 +11,24 @@ const my_comp = {
         methods: {
             changestyle: function(){
                 if(this.decora === 'none' ){
-                    this.decora='line-through';
-                    obj.show = 1;
+
+                    
+                    this.$emet("cheak",{
+                        id:obj.id,
+                        show:1,
+                        decora:'line-through'
+                    })
+                    console.log('we are therer');
                 }
                 else{
-                    this.decora='none';
-                    obj.show = 0;
+                    
+                    
+                    this.$emet("cheak",{
+                        id:obj.id,
+                        show:0,
+                        decora:'none'
+                    })
+                    console.log('we are therer');
                 }
             },
             changedis : function (){
@@ -75,6 +87,16 @@ new Vue({
             this.all=false;
             this.done = true;
         },
+        changestyle(event){
+            console.log('we are here');
+            this.all_todo.forEach((simple)=>{
+                if(simple.id === event.id){
+                    simple.decora = event.decora;
+                    simple.show = event.decora;
+                }
+            }
+            )
+        }
 
     },
 
